@@ -35,12 +35,14 @@ minute.oninput = function(e) {
 
 var btnSet = document.querySelector('.btn1');
 var audio = new Audio('alarm_audio.mp3');
+var check = true;
 btnSet.addEventListener('click', function setAlarm(){
     if (btnSet.classList[1]=="disable")  
     {
         btnSet.classList.toggle("disable");
         btnSet.innerText = 'Set';
         audio.pause();
+        check = false;
     }
     else 
     {
@@ -48,13 +50,14 @@ btnSet.addEventListener('click', function setAlarm(){
         {
             alert("Set Alarm successful!!!");
             setInterval( function (){
-                if (clock.innerText == `${timeAlarm.h} : ${timeAlarm.m} : 00`)
+                if (clock.innerText == `${timeAlarm.h} : ${timeAlarm.m} : 00` && check == true)
                 {
                     audio.play();
                 }
             }, 0);
             btnSet.innerText = 'Clear';
             btnSet.classList.toggle("disable");
+            check = true;
         }
         else
         {
